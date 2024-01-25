@@ -27,18 +27,42 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
+
+  $('.time-block').ready(function() {
+    // Get the current hour
+    var currentHour = dayjs().hour();
+  
+    // Iterate through each time block element
+    $('.time-block').each(function() {
+      var blockHour = parseInt($(this).attr('data-hour'));
+      console.log(blockHour,currentHour)
+      
+      // Compare the block hour with the current hour
+      if (blockHour < currentHour) {
+        // Add class for past time block
+        $(this).addClass('past');
+      } else if (blockHour === currentHour) {
+        // Add class for present time block
+        $(this).addClass('present');
+      } else {
+        // Add class for future time block
+        $(this).addClass('future');
+      }
+    });
+  });
+    
+  
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
-    $("#hour-9 .description").val(localStorage.getItem("hour-9"));
+    $("#hour-9  .description").val(localStorage.getItem("hour-9"));
     $("#hour-10 .description").val(localStorage.getItem("hour-10"));
     $("#hour-11 .description").val(localStorage.getItem("hour-11"));
     $("#hour-12 .description").val(localStorage.getItem("hour-12"));
     $("#hour-13 .description").val(localStorage.getItem("hour-13"));
     $("#hour-14 .description").val(localStorage.getItem("hour-14"));
     $("#hour-15 .description").val(localStorage.getItem("hour-15"));
-    $("#hour-16.description").val(localStorage.getItem("hour-16"));
-    $("#hour-17.description").val(localStorage.getItem("hour-17"));
+    $("#hour-16 .description").val(localStorage.getItem("hour-16"));
+    $("#hour-17 .description").val(localStorage.getItem("hour-17"));
 });
